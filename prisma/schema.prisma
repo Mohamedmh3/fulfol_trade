@@ -12,6 +12,7 @@ model Trade {
   currency         String
   trade_amount     Float
   best_buy_time    DateTime
+  best_sell_time   DateTime
   suggested_amount Float
   risk_assessment  String
   market_trend     String?
