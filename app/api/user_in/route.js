@@ -10,10 +10,10 @@ export async function POST(request) {
             });
         }
 
-        const { currency, amount } = body;
+        const { currency, amount, apiKey } = body;
+        // add api user key
 
-
-        if (!currency || !amount) {
+        if (!currency || !amount || !apiKey) {
             return new Response(JSON.stringify({ error: "Currency and amount are required" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json" }
@@ -23,6 +23,7 @@ export async function POST(request) {
         console.log("Received transaction data:", {
             currency,
             amount,
+            apiKey,
             timestamp: new Date().toISOString()
         });
 
