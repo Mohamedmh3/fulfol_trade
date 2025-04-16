@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
-import cookie from 'cookie';
+import * as cookie from 'cookie';
 
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;

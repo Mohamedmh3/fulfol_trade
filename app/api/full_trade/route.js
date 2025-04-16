@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-import cookie from 'cookie'; 
+import * as cookie from 'cookie';
 const BASE_URL = process.env.BASE_URL;
 const USER_DATA = process.env.USER_DATA;
 const REGISTER_USER = process.env.REGISTER_USER;

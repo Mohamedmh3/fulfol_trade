@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import cookie from 'cookie'; 
+import * as cookie from 'cookie';
+ 
 import jwt from 'jsonwebtoken';
   
 
@@ -42,7 +43,7 @@ export async function POST(req) {
     suggested_amount = parseFloat(suggested_amount);
     
 
-    const userIdFromAPI = userId;
+const userIdFromAPI = userId;
 
     // const { id: userIdFromAPI } = userId;
 
