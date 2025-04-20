@@ -1,10 +1,23 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+import * as cookie from 'cookie';
+
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(req) {
+  const cookies = cookie.parse(req.headers.get('Cookie') || ''); 
+  const token = cookies.token; 
+
+  if (!token) {
+    return new Response(
+      JSON.stringify({ error: 'Unauthorized' }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
   try {
+
     const { currency, prices, trade_amount } = await req.json();
 
     if (!currency || typeof currency !== "string") {
@@ -37,7 +50,6 @@ export async function POST(req) {
 
     let analysisText = response.choices[0].message.content.trim();
 
-    // Use regex to remove triple backticks and optional "json" marker
     const regex = /^```(?:json)?\s*([\s\S]+?)\s*```$/;
     const match = analysisText.match(regex);
     if (match) {
