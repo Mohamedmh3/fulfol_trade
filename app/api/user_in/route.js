@@ -30,9 +30,6 @@ export async function POST(request) {
       });
     }
 
-    console.log("Transaction authorized for user:", user.id);
-
-
     const token = jwt.sign(
       { id: user.id },
       JWT_SECRET,

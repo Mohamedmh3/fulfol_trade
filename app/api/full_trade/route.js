@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+
 import * as cookie from "cookie";
 
 const USER_DATA = process.env.USER_DATA;
 const CURRENCY_FETCH = process.env.CURRENCY_FETCH;
 const OPEN_AI_FETCH = process.env.OPEN_AI_FETCH;
 const DATABASE_FETCH = process.env.DATABASE_FETCH;
-const JWT_SECRET = process.env.JWT_SECRET;
+
 
 export async function POST(req) {
   try {
@@ -20,14 +20,7 @@ export async function POST(req) {
       );
     }
 
-    try {
-      jwt.verify(token, JWT_SECRET);
-    } catch {
-      return NextResponse.json(
-        { error: "Unauthorized: Invalid token" },
-        { status: 401 }
-      );
-    }
+  
 
     const userInput = await req.json();
 

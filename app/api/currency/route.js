@@ -1,7 +1,5 @@
-  import jwt from 'jsonwebtoken';
   import * as cookie from 'cookie';
 
-  const JWT_SECRET = process.env.JWT_SECRET;
 
   export async function GET(request) {
     const vs_currency = "usd";
@@ -18,8 +16,6 @@
     }
 
     try {
-      const decoded = jwt.verify(token, JWT_SECRET);
-      console.log("Decoded token:", decoded);
 
       const { searchParams } = new URL(request.url);
       const currency = searchParams.get("currency");
@@ -31,9 +27,7 @@
         );
       }
 
-      console.log(currency);
       const currencyLower = currency.toLowerCase();
-      console.log(currencyLower);
       const pricesRes = await fetch(
         `https://api.coingecko.com/api/v3/coins/${currencyLower}/market_chart?vs_currency=${vs_currency}&days=${days}&interval=daily`
       );
@@ -57,7 +51,6 @@
         };
       });
 
-      console.log("Processed Prices:", processedPrices);
 
       return new Response(JSON.stringify({ prices: processedPrices }), {
         status: 200,

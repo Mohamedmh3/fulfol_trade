@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import * as cookie from 'cookie';
-import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET;
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -19,8 +17,6 @@ export async function POST(req) {
   }
 
   try {
-       const decoded = jwt.verify(token, JWT_SECRET);
-        console.log("Decoded token:", decoded);
 
     const { currency, prices, trade_amount } = await req.json();
 

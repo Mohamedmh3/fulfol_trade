@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import * as cookie from 'cookie';
  
-import jwt from 'jsonwebtoken';
   
 
-const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const prisma = new PrismaClient();
@@ -14,7 +12,6 @@ const prisma = new PrismaClient();
 export async function POST(req) {
   const cookies = cookie.parse(req.headers.get('Cookie' || '')); 
   const token = cookies.token; 
-  // console.log("Decoded token:", token);
 
   if (!token) {
     return new Response(
@@ -25,10 +22,6 @@ export async function POST(req) {
 
  
   try {
-
-        const decoded = jwt.verify(token, JWT_SECRET);
-    console.log("Decoded token:", decoded);
-
     let { 
       currency, 
       trade_amount, 
